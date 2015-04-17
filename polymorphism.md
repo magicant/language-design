@@ -43,7 +43,25 @@ nil (List Nat) : List (List Nat)
 
 三つ目の方法は、引数として渡す型をコード上に明示させずに、常に処理系に推論させるもの。この方法では型を記述するための構文の拡張がそもそも不要となる。
 
-TBD: 例
+``` ocaml
+(* 例へば OCaml では、空リストの型は ΠA::*. List A となる *)
+# let nil = [];;
+val nil : 'a list = []
+(* また Cons の型は ΠA::*. A → List A → List A である *)
+# let cons h t = h::t;;
+val cons : 'a -> 'a list -> 'a list = <fun>
+(* cons をユニットに適用するとき、引数 h の型がユニット型であることから
+   型引数 A がユニット型であると推論される *)
+# cons ();;
+- : unit list -> unit list = <fun>
+(* cons の引数を入れ替へて見ると、型は ΠA::*. List A → A → List A *)
+# let cons' t h = h::t;;
+val cons' : 'a list -> 'a -> 'a list = <fun>
+(* これを nil に適用すると、型は ΠA::*. A → List A *)
+# cons' nil;;
+- : '_a -> '_a list = <fun>
+(* 型引数を明示すると λA::*. cons' A (nil A) *)
+```
 
 ## 部分型多相
 
