@@ -42,6 +42,31 @@ Java や C# など他の言語では finally 文(に相当する言語機能)に
 新たな例外をどの様に扱ふかについてのもう一つの解は、両方の例外をリストか何かに入れて覚えておいて、例外ハンドラでそれを受け取るといふやり方である。
 この方法の問題は、発生した二つの例外の種類と例外ハンドラが受け取ることのできる例外の種類をどの様に関連付ければよいのかが明らかでないことである。
 
+## 例外の分類
+
+例外を分類し、特定の例外ハンドラが特定の種類の例外にのみ反応する様にプログラミングできると便利である。
+
+例外の単純な分類法は、C の `errno` の様に例外の種類に定数値を割り振る方法である。
+しかしこの方法は種類に応じて異なる型の付加情報を例外に持たせるには都合が悪い。
+
+OCaml のやうに例外をバリアントとして分類すると種類に応じて異なる型の情報を持たせられる。また、例外ハンドラが例外に反応するかどうかはパターンマッチングによって選別できる。
+
+C++ や Java では、実行時キャストが成功するかどうかで例外ハンドラを実行するかどうかを決める。すなはち、例外はクラスの派生関係(の推移閉包)がなす半順序によって分類される。
+これの便利なところは、例外ハンドラが反応すべき例外の種類の抽象化が可能になる点である。例へば Java では、`FileNotFoundException` と `MalformedURLException` はどちらも `IOException` の子クラスである。ファイルが見つからない場合と URL が不正な場合とに対して異なる様に対応したければ、二つの種類の例外に対してそれぞれ `catch` 節を書けばよい。それらも含めた入出力に関する全ての例外に対して同じ様に対応したければ、ただ `IOException` について `catch` 節を書けばよい。
+
+以下の様に、派生関係による分類をバリアントで模倣することはできる。ただしより派生されたクラスほど記述が煩雑になるので簡潔にするための言語によるサポートが望まれる。
+
+``` ocaml
+# type io_exception = FileNotFoundException | MalformedURLException;;
+type io_exception = FileNotFoundException | MalformedURLException
+# exception IOException of io_exception;;
+exception IOException of io_exception
+# try raise (IOException FileNotFoundException) with
+  | IOException MalformedURLException -> 0
+  | IOException _ -> 1;;
+- : int = 1
+```
+
 ## 検査例外
 
 ## 例外の実装
