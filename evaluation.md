@@ -43,10 +43,10 @@ Haskell はデフォルトが非正格評価であるといふだけで、正格
 
 ```
 # 遅延評価版
-fix : ∀T::*. (T→T)→T
+fix : ΠT::*. (T→T)→T
 fix = λT::*. λf:T→T. let r = λx:μU.U→T. f (x x) in r r
 
 # 値呼び版
-fix : ∀T1::*. ∀T2::*. ((T1→T2)→(T1→T2))→(T1→T2)
+fix : ΠT1::*. ΠT2::*. ((T1→T2)→(T1→T2))→(T1→T2)
 fix = λT1::*. λT2::*. λf:(T1→T2)→(T1→T2). let r = λx:μU.U→(T1→T2). f (λy:T1. x x y) in r r
 ```
