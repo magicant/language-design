@@ -182,3 +182,47 @@ IntList = Nil | Cons
 ```
 
 結局、`cons` の定義と `IntList` の定義が相互に依存してゐるためにそれらを分けて書かうとするとややこしくなる。故に、直和と再帰を一つの構文内で纏めて宣言する方式を採用する言語が多い。
+
+### 相互依存する型
+
+オブジェクト指向プログラミングでは、クラスの相互依存は一般に望ましくない設計であるとされる。どのオブジェクトがどのオブジェクトを支配してゐるのか分かりにくくなってしまふ為である。
+
+```C++
+// C++
+class Controller;
+class View {
+  Controller *controller;
+}
+class Controller {
+  View *view;
+}
+```
+
+被支配者から支配者への依存をインターフェースとして抽象化するとこの様な相互依存を断ち切ることができる。
+
+```C++
+class ViewEventListener {
+  ... // 抽象メソッドの定義
+}
+class View {
+  ViewEventListener *listener;
+}
+class Controller : private ViewEventListener {
+  View *view;
+}
+```
+
+ここでクラスの事前宣言が不要になったことに注目する。**事前宣言** (forward declaration) とは実体を定義する前にそのものの名前と型 (種) のみを宣言するもののことである。相互依存が無ければ型の事前宣言は不要である。
+
+C++、Java、C# などクラスを主体とする言語の多くは、クラスの定義をクラスごとに独立して書く構文を採用してゐる。依存し合ふ複数のクラスを離れた場所に書くことができるため、相互依存関係があることをコードからすぐ読み取ることは難しい。
+また Java や C# では相互依存するクラスの名前を事前宣言無しで処理系が自動的に解決する。これにより意図しない相互依存を発生させやすい。([Cycles and modularity in the wild](http://fsharpforfunandprofit.com/posts/cycles-and-modularity-in-the-wild/))
+
+OCaml では、相互依存する型は一度に纏めて定義しなければならない。
+
+```ocaml
+type even =
+  | Zero
+  | Even of odd
+and odd =
+  | Odd of even
+```
