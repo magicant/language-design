@@ -20,5 +20,6 @@
   - [メソッドのオーバーライド](overriding.md)
   - [デストラクター](destructor.md)
 - スケーリング
+  - [関数の構成](function.md) - 名前付き引数・部分適用
   - [名前空間](namespace.md)
   - [分割コンパイル](separatecompilation.md) - 型の先行宣言・ヘッダーファイル
