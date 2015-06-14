@@ -23,3 +23,7 @@
   - [関数の構成](function.md) - 名前付き引数・部分適用
   - [名前空間](namespace.md)
   - [分割コンパイル](separatecompilation.md) - 型の先行宣言・ヘッダーファイル
+
+## リンク
+
+- [検査例外と場合分けと多態性の話](http://magicant.txt-nifty.com/main/2013/05/post-5cc9.html) - 直和型の話もある
