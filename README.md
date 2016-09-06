@@ -32,3 +32,5 @@
 - [ジェネリック: Java vs C#](https://magicant.github.io/programmingmemo/genericsjavavscs.html)
 - [検査例外と場合分けと多態性の話](http://magicant.txt-nifty.com/main/2013/05/post-5cc9.html) - 直和型の話もある
 - [D 言語仕様所感](http://togetter.com/li/724805)
+- [自然言語とプログラミング言語の文法・意味論・モデリングに関する思索](https://twitter.com/tnacigam/status/739299546665078785)
+- [Literate プログラミングに関するつぶやき](https://twitter.com/tnacigam/status/772813631339671553)
