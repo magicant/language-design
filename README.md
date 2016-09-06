@@ -29,4 +29,6 @@
 
 ## リンク
 
+- [ジェネリック: Java vs C#](https://magicant.github.io/programmingmemo/genericsjavavscs.html)
 - [検査例外と場合分けと多態性の話](http://magicant.txt-nifty.com/main/2013/05/post-5cc9.html) - 直和型の話もある
+- [D 言語仕様所感](http://togetter.com/li/724805)
