@@ -34,3 +34,4 @@
 - [D 言語仕様所感](http://togetter.com/li/724805)
 - [自然言語とプログラミング言語の文法・意味論・モデリングに関する思索](https://twitter.com/tnacigam/status/739299546665078785)
 - [Literate プログラミングに関するつぶやき](https://twitter.com/tnacigam/status/772813631339671553)
+- [Future の実装方式に関するつぶやき](https://twitter.com/tnacigam/status/778219552110891008)
